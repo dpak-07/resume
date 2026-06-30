@@ -1,0 +1,520 @@
+ 
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deepak S – Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f2f2f2;
+      --page: #ffffff;
+      --text: #1a1a1a;
+      --muted: #555;
+      --light: #888;
+      --border: #d0d0d0;
+      --accent: #2d2d2d;
+      --section-bar: #3a3a3a;
+      --tag-bg: #ebebeb;
+      --link: #2563eb;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    /* ── DOWNLOAD BUTTON ── */
+    .dl-btn {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 4px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.3px;
+    }
+    .dl-btn:hover { background: #111; transform: translateY(-1px); }
+    .dl-btn svg { width: 14px; height: 14px; }
+
+    /* ── PAGE ── */
+    .page {
+      width: 794px;
+      min-height: 1123px;
+      margin: 30px auto 50px;
+      background: var(--page);
+      padding: 28px 38px 28px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    }
+
+    /* ── HEADER ── */
+    .header { text-align: center; margin-bottom: 6px; }
+    .header-name {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2px;
+    }
+    .header-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+    .header-contacts {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 3px 14px;
+      font-size: 10.5px;
+      color: var(--muted);
+    }
+    .contact-item { display: flex; align-items: center; gap: 4px; }
+    .contact-item a { color: var(--text); text-decoration: none; font-weight: 500; }
+    .contact-item a:hover { color: var(--link); text-decoration: underline; }
+    .contact-icon { width: 12px; height: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .contact-icon svg { width: 12px; height: 12px; fill: var(--muted); }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 2px solid var(--section-bar); margin: 7px 0 4px; }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      background: var(--tag-bg);
+      padding: 2px 7px;
+      border-left: 3px solid var(--section-bar);
+      margin-bottom: 4px;
+      margin-top: 6px;
+    }
+
+    /* ── OBJECTIVE / SUMMARY ── */
+    .body-text {
+      font-size: 10.5px;
+      color: var(--muted);
+      text-align: justify;
+      line-height: 1.5;
+    }
+
+    /* ── TWO COLUMN SUMMARY ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+
+    /* ── SKILLS ── */
+    .skills-table { width: 100%; border-collapse: collapse; }
+    .skills-table tr td { padding: 1.5px 4px 1.5px 0; font-size: 10.5px; vertical-align: top; }
+    .skills-table tr td:first-child { font-weight: 600; color: var(--accent); width: 130px; white-space: nowrap; }
+    .skills-table tr td:last-child { color: var(--muted); }
+
+    /* ── EDUCATION ── */
+    .edu-row { display: flex; justify-content: space-between; align-items: flex-start; }
+    .edu-row + .edu-row { margin-top: 2px; }
+    .edu-degree { font-weight: 700; font-size: 11px; }
+    .edu-school { font-size: 10.5px; color: var(--muted); }
+
+    /* ── EXPERIENCE / PROJECTS / INTERNSHIPS ── */
+    .entry { margin-bottom: 5px; }
+    .entry-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .entry-title { font-weight: 700; font-size: 11px; color: var(--accent); }
+    .entry-year {
+      font-size: 10px;
+      color: #fff;
+      background: var(--section-bar);
+      padding: 1px 7px;
+      border-radius: 2px;
+      white-space: nowrap;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .entry-tech { font-size: 10px; color: var(--light); font-style: italic; margin: 1px 0 3px; }
+    .entry-bullets { list-style: none; margin: 0; }
+    .entry-bullets li {
+      font-size: 10.5px;
+      color: var(--muted);
+      padding-left: 13px;
+      position: relative;
+      margin-bottom: 1.5px;
+      line-height: 1.45;
+    }
+    .entry-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--section-bar);
+      font-size: 9px;
+      top: 1px;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    .cert-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .cert-card {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 5px 8px;
+    }
+    .cert-name { font-weight: 700; font-size: 10px; color: var(--accent); margin-bottom: 1px; }
+    .cert-org { font-size: 9.5px; color: var(--light); }
+    .cert-date { font-size: 9px; color: var(--light); margin-top: 2px; font-family: 'IBM Plex Mono', monospace; }
+
+    /* ── PROJECT LINK ── */
+    .entry-link { font-size: 9.5px; color: var(--link); text-decoration: none; font-style: normal; margin-left: 6px; }
+    .entry-link:hover { text-decoration: underline; }
+
+    /* ── PROJECTS 2-COL GRID ── */
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+    .projects-grid .entry { margin-bottom: 5px; }
+
+    /* ── ACHIEVEMENTS ── */
+    .ach-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+    .ach-list li {
+      font-size: 10.5px;
+      color: var(--muted);
+      padding-left: 13px;
+      position: relative;
+      line-height: 1.45;
+    }
+    .ach-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--section-bar);
+      font-size: 8px;
+      top: 2px;
+    }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      @page {
+        size: A4;
+        margin: 0;
+        /* Removes browser-injected headers/footers (URL, timestamp, page number) */
+      }
+      html, body {
+        background: #fff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        color-adjust: exact;
+      }
+      .dl-btn { display: none !important; }
+      .page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        padding: 18px 28px !important;
+        width: 100% !important;
+        min-height: unset !important;
+        zoom: var(--print-scale, 1);
+      }
+      .header { margin-bottom: 5px !important; }
+      .header-name { font-size: 24px !important; margin-bottom: 2px !important; }
+      .header-sub { margin-bottom: 5px !important; }
+      .divider { margin: 6px 0 4px !important; }
+      .section-title {
+        margin-top: 6px !important;
+        margin-bottom: 4px !important;
+        padding: 2px 7px !important;
+      }
+      .body-text,
+      .skills-table tr td,
+      .entry-bullets li,
+      .ach-list li {
+        font-size: 10.55px !important;
+        line-height: 1.42 !important;
+      }
+      .entry,
+      .projects-grid .entry {
+        margin-bottom: 5px !important;
+      }
+      .entry-tech {
+        margin: 1px 0 3px !important;
+      }
+      .entry-bullets li {
+        margin-bottom: 0.5px !important;
+      }
+      .cert-card {
+        padding: 5px 8px !important;
+      }
+      .cert-grid {
+        gap: 6px !important;
+      }
+      .ach-list {
+        gap: 2px 3px !important;
+      }
+    }
+  </style>
+  </head>
+  <body>
+
+  <button class="dl-btn" onclick="printResume()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
+    </svg>
+    Download PDF
+  </button>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-name">DEEPAK S</div>
+      <div class="header-sub">B.Tech Artificial Intelligence &amp; Data Science Student &nbsp;|&nbsp; Chennai, India</div>
+      <div class="header-contacts">
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
+          <span>+91 63690 21716</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          <a href="mailto:deepakofficial0103@gmail.com">deepakofficial0103@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+          <a href="https://linkedin.com/in/deepak-saminathan" target="_blank">deepak-saminathan</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div>
+          <a href="https://github.com/dpak-07" target="_blank">dpak-07</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
+          <a href="https://deepakportfolio-0607.vercel.app" target="_blank">deepakportfolio-0607</a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- CAREER OBJECTIVE + PROFESSIONAL SUMMARY side by side -->
+    <div class="two-col">
+      <div>
+        <div class="section-title">Career Objective</div>
+        <div class="body-text">
+          Motivated AI and Data Science student seeking backend development or software engineering roles with opportunities to work on AI/ML projects. Passionate about building scalable systems, cloud infrastructure, and intelligent applications that solve real-world problems.
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Professional Summary</div>
+        <div class="body-text">
+          Pre-final year B.Tech AI &amp; Data Science student with hands-on experience in backend development, cloud infrastructure (AWS EC2, S3), and AI/ML application development. Proven expertise in REST APIs, ML solutions, and enterprise-grade applications for 300+ users.
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="section-title">Skills</div>
+    <table class="skills-table">
+      <tr><td>Languages:</td><td>Python, C, C++, JavaScript, SQL, HTML, CSS</td></tr>
+      <tr><td>Frameworks:</td><td>React, Node.js, Flask, Express.js</td></tr>
+      <tr><td>AI / ML:</td><td>Machine Learning, Deep Learning, CNN, Model Training, PySpark</td></tr>
+      <tr><td>Databases:</td><td>MongoDB, Firebase, MySQL, PostgreSQL</td></tr>
+      <tr><td>Cloud &amp; DevOps:</td><td>AWS (EC2, S3), Hostinger, Git, Linux</td></tr>
+      <tr><td>Specialization:</td><td>Backend Development, REST API Development, Cloud Deployment &amp; Management</td></tr>
+    </table>
+
+    <!-- EDUCATION -->
+    <div class="section-title">Education</div>
+    <div class="edu-row">
+      <div>
+        <div class="edu-degree">B.Tech – Artificial Intelligence &amp; Data Science</div>
+        <div class="edu-school">Velammal Engineering College, Chennai &nbsp;|&nbsp; CGPA: 6.84</div>
+      </div>
+    </div>
+    <div class="edu-row">
+      <div>
+        <div class="edu-degree">12th Standard</div>
+        <div class="edu-school">Velammal Matric Hr Sec School, Mogappair &nbsp;|&nbsp; 68%</div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="section-title">Experience</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">Backend &amp; Cloud Engineer &nbsp;|&nbsp; Velammal Engineering College Official Website</div>
+        <div class="entry-year">2025</div>
+      </div>
+      <div class="entry-tech">Node.js, Backend Systems, AWS (EC2, S3), Cloud Hosting</div>
+      <ul class="entry-bullets">
+        <li>Architected and deployed backend infrastructure on AWS EC2 with S3 storage for the official college website.</li>
+        <li>Built and maintained Node.js backend services supporting dynamic content and administrative operations.</li>
+        <li>Managed cloud deployment, server configuration, and production environment for high-availability systems.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">QA Examination Portal &nbsp;|&nbsp; Velammal Engineering College</div>
+        <div class="entry-year">2025</div>
+      </div>
+      <div class="entry-tech">Node.js, Express, MongoDB, AWS (EC2, S3)</div>
+      <ul class="entry-bullets">
+        <li>Engineered backend infrastructure supporting 300+ concurrent students during live examinations.</li>
+        <li>Implemented secure admin panel with exam scheduling, question management, and automated result generation.</li>
+        <li>Deployed on AWS EC2 with S3 storage for scalable and reliable performance in production.</li>
+      </ul>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="section-title">Projects</div>
+    <div class="projects-grid">
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title">Study Spark – AI Learning Platform</div>
+          <div class="entry-year">2025</div>
+        </div>
+        <div class="entry-tech">MERN Stack, Firebase, AI/ML</div>
+        <ul class="entry-bullets">
+          <li>Developed AI-powered platform with automated content summarization and flashcard generation.</li>
+          <li>Implemented Teach-Back AI chatbot for personalized and interactive learning experiences.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title">AI-Powered Fake Website Detection</div>
+          <div class="entry-year">2025</div>
+        </div>
+        <div class="entry-tech">Flask, Flutter, Machine Learning (CNN)</div>
+        <ul class="entry-bullets">
+          <li>Built and trained CNN-based ML model to detect fraudulent websites with real-time alerts.</li>
+          <li>Integrated Flutter mobile frontend with Flask REST API backend for seamless functionality.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title">CiviSense</div>
+          <div class="entry-year">2025</div>
+        </div>
+        <div class="entry-tech">Python, AI/ML, React Native, React.js, Node.js</div>
+        <ul class="entry-bullets">
+          <li>Built an AI-powered civic issue detection and reporting platform for smart city use cases.</li>
+          <li>Integrated real-time data processing with automated classification of public complaints.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-title">Dynamic Portfolio</div>
+          <div class="entry-year">2025</div>
+        </div>
+        <div class="entry-tech">React, Node.js, Tailwind CSS</div>
+        <ul class="entry-bullets">
+          <li>Developed a fully dynamic personal portfolio with admin panel for content management and updates.</li>
+          <li>deployed on firebase hosting for seamless deployment and scaling.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- INTERNSHIPS -->
+    <div class="section-title">Internships</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">Backend Developer Intern &nbsp;|&nbsp; Zidio</div>
+        <div class="entry-year">2025</div>
+      </div>
+      <ul class="entry-bullets">
+        <li>Developed MERN stack applications with advanced backend functionalities and database management.</li>
+        <li>Worked on REST API development, authentication systems, and production deployment workflows.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">Web Development Intern &nbsp;|&nbsp; CodeSoft</div>
+        <div class="entry-year">2024</div>
+      </div>
+      <ul class="entry-bullets">
+        <li>Built interactive web applications including calculators, landing pages, and portfolio sites.</li>
+      </ul>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="section-title">Certifications</div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-name">Full Stack Web Development</div>
+        <div class="cert-org">CSC – HDFC Skill Development Center</div>
+        <div class="cert-date">Aug 2024</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-name">UI/UX Design Master Class</div>
+        <div class="cert-org">Noviteck Solutions</div>
+        <div class="cert-date">2025</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-name">AI Agents with MongoDB</div>
+        <div class="cert-org">MongoDB, Inc.</div>
+        <div class="cert-date">2025</div>
+      </div>
+    </div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="section-title">Achievements</div>
+    <ul class="ach-list">
+      <li>Backend &amp; Cloud Engineer for Velammal Engineering College official website.</li>
+      <li>Developed production examination system serving 300+ students.</li>
+      <li>Successfully deployed and managed cloud infrastructure on AWS (EC2, S3).</li>
+      <li>Built scalable REST APIs handling real-time workflows and automated processing.</li>
+    </ul>
+
+  </div><!-- /page -->
+
+  <script>
+  function fitResumeToOnePage() {
+    const page = document.querySelector('.page');
+    if (!page) return;
+
+    page.style.setProperty('--print-scale', '1');
+
+    const a4HeightPx = 1122;
+    const pageHeight = page.scrollHeight;
+    const scale = Math.min(1, a4HeightPx / pageHeight);
+
+    page.style.setProperty('--print-scale', String(Math.max(scale, 0.9)));
+  }
+
+  function printResume() {
+    // Hide the button, print, then show it again
+    const btn = document.querySelector('.dl-btn');
+    btn.style.display = 'none';
+    fitResumeToOnePage();
+    window.print();
+    btn.style.display = 'flex';
+  }
+
+  window.addEventListener('beforeprint', fitResumeToOnePage);
+  window.addEventListener('afterprint', () => {
+    document.querySelector('.page')?.style.setProperty('--print-scale', '1');
+  });
+  </script>
+  </body>
+  </html> 
